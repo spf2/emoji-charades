@@ -1,11 +1,8 @@
 Emoji Charades Server
 =====================
 
-Rails initalize:
-
 bundle update
 rake db:migrate
-
-Rails run server:
-
 rails server
+
+iPhone client: https://github.com/spf2/EmojiCharades
