@@ -1,7 +1,8 @@
 class GameController < ApplicationController
   def index
-    games = Game.all(:include => :owner)
-    render :json => games.to_json(:include => :owner)
+    games = Game.all(:include => [:owner, { :winning_turn => :user } ])
+    render :json => games.to_json(
+      :include => { :owner => {}, :winning_turn => { :include => :user } })
   end
 
   def create
@@ -14,5 +15,10 @@ class GameController < ApplicationController
     game = Game.find(params[:id], :include => [:owner, { :turns => :user }])
     render :json => game.to_json(
       :include => { :owner => {}, :turns => { :include => :user } })
+  end
+  
+  def destroy
+    Game.destroy(params[:id])
+    render :json => {}
   end
 end

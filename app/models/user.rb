@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Extensions
   has_many :games
   validates_format_of(:name,
                       :with => /^\w+$/,

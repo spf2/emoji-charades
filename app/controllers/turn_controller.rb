@@ -23,4 +23,9 @@ class TurnController < ApplicationController
     turn.save!
     render :json => turn
   end
+  
+  def destroy
+    Turn.destroy(params[:id])
+    render :json => {}
+  end
 end

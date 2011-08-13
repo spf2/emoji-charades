@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110730175727) do
+ActiveRecord::Schema.define(:version => 20110813190528) do
 
   create_table "games", :force => true do |t|
     t.integer  "owner_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20110730175727) do
     t.datetime "done_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "num_turns",       :default => 0
+    t.integer  "winning_turn_id"
   end
 
   create_table "turns", :force => true do |t|
