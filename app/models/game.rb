@@ -9,6 +9,7 @@ class Game < ActiveRecord::Base
                       :too_short => "cannot be missing",
                       :too_long => "at most 255 characters")
   before_destroy :check_destroyable
+  validates_numericality_of :num_turns, :winning_turn_id
   
   def check_destroyable
     raise "cannot delete a game with turns" if turns.any?
