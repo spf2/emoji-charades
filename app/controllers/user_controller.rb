@@ -9,7 +9,7 @@ class UserController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    user.update_attributes!(params[:story])
+    user.update_attributes!(params[:user])
     render :json => user
   end
 
