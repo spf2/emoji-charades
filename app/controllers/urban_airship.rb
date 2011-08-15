@@ -22,7 +22,7 @@ module UrbanAirship
       request.body = payload.to_json
       response = http.request(request)
       if response.code.to_i / 100 == 2
-        logger.info "sent notification ok to #{tokens.inspect}"
+        logger.info "UA: sent notification ok to #{tokens.inspect}"
       else
         raise "notification failed: #{response.message}"
       end
