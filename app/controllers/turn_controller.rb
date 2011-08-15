@@ -13,13 +13,15 @@ class TurnController < ApplicationController
   def create
     turn = Turn.new(params[:turn])
     turn.save!
+    send_notification("+1", "#{turn.game.owner.name}: #{turn.guess}", everyone_but(turn.user))
     render :json => turn
   end
 
   def update
     turn = Turn.find(params[:id])
     # TODO(spf): ensure that updater is game owner
-    turn.result = params[:turn][:result]
+    turn.result = params[:turn][:result].to_i
+    send_notification("+1", "#{turn.user.name}: #{RESULT_HUMAN[turn.result]}", everyone_but(turn.user))
     turn.save!
     render :json => turn
   end

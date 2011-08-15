@@ -8,6 +8,7 @@ class GameController < ApplicationController
   def create
     game = Game.new(params[:game])
     game.save!
+    send_notification("+1", "#{game.owner.name}: #{game.hint}", everyone_but(game.owner))
     render :json => game
   end
 
