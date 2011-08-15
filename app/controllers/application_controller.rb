@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   end
   
   def everyone_but(user)
-    return User.all.reject{|u| u.id == user.id}
+    return User.all #.reject{|u| u.id == user.id}
   end
 end
