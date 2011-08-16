@@ -4,6 +4,8 @@ require "uri"
 
 module UrbanAirship
   def send_notification(badge, alert_message, users)
+    return unless RAILS_ENV == "production"
+    
     unless (ENV["UA_APP_KEY"] and ENV["UA_SECRET"]) 
       raise("Missing UrbanAirship credentials in UA_APP_KEY and UA_SECRET") 
     end
