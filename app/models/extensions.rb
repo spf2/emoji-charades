@@ -5,7 +5,7 @@ module Extensions
     klass.class_eval do
       alias :as_json :as_json_no_nulls
     end
-  end   
+  end
   
   def as_json_no_nulls(options)
     # NOTE(spf): the null-stripping is only at the top level.
