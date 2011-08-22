@@ -3,7 +3,6 @@ class Turn < ActiveRecord::Base
   before_create :result_not_specified
   belongs_to :game, :touch => true
   belongs_to :user
-  validate :game_is_not_done
   validates_presence_of :game
   validates_presence_of :user
   validates_length_of(:guess,
@@ -23,12 +22,8 @@ class Turn < ActiveRecord::Base
     result.nil? or RESULT[:none]
   end
 
-  def game_is_not_done
-    errors.add_to_base("cannot modify done game") if game.done_at
-  end
-
   def maybe_update_game
-    if result == RESULT[:right]
+    if game.done_at.nil? and result == RESULT[:right]
       game.winning_turn_id = id
       game.done_at = Time.now
       game.save!
