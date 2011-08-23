@@ -4,10 +4,9 @@ class GameController < ApplicationController
   def index
     query = { :include => [:owner, { :winning_turn => :user } ] }
     if (@self_user.id and params[:only] == "friends") 
-      self_user = User.find(@self_user.id)
       whitelist = [@self_user.id]
-      if (self_user.friends)
-        whitelist = whitelist.concat(self_user.friends.split)
+      if (@self_user.friends)
+        whitelist = whitelist.concat(@self_user.friends.split)
       end
       query[:conditions] = ["owner_id in (?)", whitelist]
     end
