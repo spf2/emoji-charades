@@ -12,7 +12,7 @@ class TurnController < ApplicationController
   end
   
   def create
-    raise "not user" unless params[:turn][:user_id] == @self_user.id
+    raise "not turn user" unless params[:turn][:user_id] == @self_user.id
     turn = Turn.new(params[:turn])
     turn.save!
     send_notification("+1", "#{turn.user.name} -> #{turn.game.owner.name}: #{turn.guess}",
@@ -22,7 +22,7 @@ class TurnController < ApplicationController
 
   def update
     turn = Turn.find(params[:id])
-    raise "not game owner" unless turn.game.owner_id == @self_user.id
+    raise "not turn user" unless turn.game.owner_id == @self_user.id
     turn.result = params[:turn][:result].to_i
     send_notification("+1", "#{turn.game.owner.name} -> #{turn.user.name}: #{RESULT_HUMAN[turn.result]}",
                       everyone_but(turn.user))
@@ -33,7 +33,7 @@ class TurnController < ApplicationController
   def destroy
     turn = Turn.find_by_id(params[:id])
     if (turn)
-      raise "not user" unless turn.user_id == @self_user.id
+      raise "not turn user" unless turn.user_id == @self_user.id
       Turn.destroy(params[:id])
     end
     render :json => {}
