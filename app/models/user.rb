@@ -16,8 +16,8 @@ class User < ActiveRecord::Base
   def refresh_facebook_friends
     # will fail without a valid facebook_access_token
     fb_friends = facebook_friend_ids(facebook_access_token)
-    fb_ec_friends = User.find_by_sql(["select id from users where facebook_id in (?)", fb_friends]).map{|u| u.id.to_i}
-    self.friends = fb_ec_friends.join(" ")
+    fb_ec_friends = User.find(:all, :conditions => ["facebook_id in (?)", fb_friends], :select => "id")
+    self.friends = fb_ec_friends.map{|u| u.id}.join(" ")
   end
   
   def validate_facebook_id
