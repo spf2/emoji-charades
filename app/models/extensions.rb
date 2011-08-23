@@ -12,5 +12,5 @@ module Extensions
     hash = serializable_hash(options).reject {|key, value| value.nil? }
     hash = { self.class.model_name.underscore => hash } if include_root_in_json
     hash
-  end      
+  end
 end

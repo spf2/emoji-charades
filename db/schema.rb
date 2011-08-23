@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816043103) do
+ActiveRecord::Schema.define(:version => 20110822222703) do
 
   create_table "games", :force => true do |t|
     t.integer  "owner_id"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20110816043103) do
     t.datetime "updated_at"
     t.string   "aps_token"
     t.string   "facebook_id"
+    t.string   "facebook_access_token"
+    t.string   "friends"
   end
 
   add_index "users", ["facebook_id"], :name => "index_users_on_facebook_id", :unique => true
