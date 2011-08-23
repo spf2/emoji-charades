@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
   def everyone_but(user)
     # TODO(spf): presumably this should be restricted to friends...
-    return User.reject{|u| u.id == user.id}
+    return User.all.reject{|u| u.id == user.id}
   end
   
   def require_http_auth_user
