@@ -12,6 +12,7 @@ class Turn < ActiveRecord::Base
   after_destroy :decrement_num_turns
   after_create :increment_num_turns
   after_update :maybe_update_game
+  attr_readonly :created_at
 
   def check_destroyable
     raise "cannot delete a turn with result" unless result == RESULT[:none]
