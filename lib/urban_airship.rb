@@ -26,7 +26,7 @@ module UrbanAirship
       if response.code.to_i / 100 == 2
         logger.info "UA: sent notification ok to #{tokens.inspect}"
       else
-        raise "notification failed: #{response.message}"
+        raise "urban airship server error: #{response.message}"
       end
     end
   end

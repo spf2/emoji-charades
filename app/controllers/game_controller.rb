@@ -11,7 +11,7 @@ class GameController < ApplicationController
       query[:conditions] = ["owner_id in (?)", whitelist]
     end
     query[:limit] = 25
-    query[:order] = 'created_at desc'
+    query[:order] = 'updated_at desc'
     games = Game.all(query)
     render :json => games_as_json(games)
   end
