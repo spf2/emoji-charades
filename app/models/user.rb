@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_readonly :facebook_id, :created_at
   
   def self.public_attrs
-    [:id, :name, :created_at, :updated_at]
+    [:id, :name, :created_at, :updated_at, :facebook_id]
   end
   
   def refresh_facebook_friends
